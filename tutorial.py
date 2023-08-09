@@ -1,6 +1,11 @@
 from flask import Flask, redirect, url_for, render_template, request, session, flash
 from datetime import timedelta
 
+import sys # for CLI args
+
+# PORT = None
+# PORT = 80
+
 app = Flask(__name__)
 
 app.secret_key = "🔑1"
@@ -71,5 +76,23 @@ def logout():
 
 	return redirect(url_for("login"))
 
+def get_port():
+	port = None
+
+	if "PORT" in globals():
+		port = PORT
+
+	if len(sys.argv) > 1:
+		try:
+			number = int(sys.argv[1])
+			port = number
+		except:
+			print(port)
+
+	if port == None or port <= 0:
+		port = 5000
+
+	return port
+
 if __name__ == "__main__":
-	app.run(debug = True)
+	app.run( debug = True, port = get_port() )
