@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}HoMe PaGe{% endblock %}
+{%block content%}
+<h1>Home Page</h1>
+
+{% if user %}
+What do you want to do today, {{user}}?
+{% else %}
+You are not logged in.
+{% endif %}
+
+{%endblock%}
